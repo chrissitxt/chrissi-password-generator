@@ -115,7 +115,7 @@
     .star {
         position: absolute;
         border-radius: 50%;
-        background: var(--accent);
+        background: var(--sub);
         animation: star-drift linear infinite alternate, star-twinkle ease-in-out infinite;
     }
 
@@ -127,13 +127,6 @@
     @keyframes star-twinkle {
         0%, 100% { opacity: var(--star-min, 0.1); }
         50% { opacity: var(--star-max, 0.4); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .star {
-            animation: none;
-            opacity: 0.2;
-        }
     }
 
     .page-title {
@@ -173,10 +166,6 @@
     @keyframes password-refresh {
         0% { opacity: 0; transform: translateY(-3px); filter: blur(2px); }
         100% { opacity: 1; transform: translateY(0); filter: blur(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        #password.refresh { animation: none; }
     }
 
     .output-actions {
@@ -226,10 +215,6 @@
         0% { transform: scale(1); }
         40% { transform: scale(1.15); }
         100% { transform: scale(1); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        #copy.done { animation: none; }
     }
 
     .copied-msg {
