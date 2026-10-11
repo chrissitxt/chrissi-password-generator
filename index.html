@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>chrissi's password generator</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔑</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
     /* design tokens */
     :root {
@@ -16,7 +16,6 @@
         --highlight: #e0e0e0;
         --glass-bg: rgba(0, 0, 0, 0.03);
         --glass-border: rgba(0, 0, 0, 0.08);
-        --spacing: 8px;
         --spacing-2: 16px;
         --spacing-3: 24px;
         --spacing-4: 32px;
@@ -39,30 +38,9 @@
     }
 
     html {
-        scroll-behavior: smooth;
         scrollbar-width: thin;
         scrollbar-color: var(--glass-border) transparent;
         scrollbar-gutter: stable;
-    }
-
-    *::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-    }
-
-    *::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
-    *::-webkit-scrollbar-thumb {
-        background: var(--glass-border);
-        border-radius: 10px;
-    }
-
-    *::-webkit-scrollbar-thumb:hover {
-        background: var(--sub);
-        opacity: 0.3;
-        border-radius: 10px;
     }
 
     * {
@@ -84,15 +62,10 @@
         background: var(--highlight);
     }
 
-    a {
-        color: inherit;
-    }
-
     .glass {
         background: var(--glass-bg);
         border: 1px solid var(--glass-border);
         backdrop-filter: blur(12px);
-        transition: filter 0.2s;
     }
 
     .page {
@@ -147,7 +120,6 @@
     }
 
     #password {
-        font-family: "Google Sans Code";
         font-size: 16px;
         line-height: 1.5;
         word-break: break-all;
@@ -184,6 +156,8 @@
         align-items: center;
         justify-content: center;
         color: var(--sub);
+        border: none;
+        background: transparent;
         cursor: pointer;
         transition: color 0.2s ease, background 0.2s ease, transform 0.1s ease;
     }
@@ -283,7 +257,7 @@
     }
 
     .length-control input[type="range"] {
-        -webkit-appearance: none;
+        appearance: none;
         width: 120px;
         height: 2px;
         background: var(--glass-border);
@@ -292,7 +266,7 @@
     }
 
     .length-control input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
+        appearance: none;
         width: 12px;
         height: 12px;
         border-radius: 50%;
@@ -310,7 +284,6 @@
     }
 
     .length-value {
-        font-family: "Google Sans Code";
         font-size: 13px;
         color: var(--sub);
         width: 22px;
@@ -377,15 +350,15 @@
     <div class="output glass">
         <span id="password" class="empty">generate a password</span>
         <div class="output-actions">
-            <div id="generate" role="button" aria-label="generate new password">
+            <button id="generate" type="button" aria-label="generate new password">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
-            </div>
-            <div id="copy" role="button" aria-label="copy password">
+            </button>
+            <button id="copy" type="button" aria-label="copy password">
                 <svg id="copyIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
-            </div>
+            </button>
         </div>
     </div>
-    <div class="copied-msg" id="copiedMsg"></div>
+    <div class="copied-msg" id="copiedMsg" aria-live="polite"></div>
 
     <div class="strength">
         <span id="strengthLabel">strength</span>
@@ -401,24 +374,24 @@
             </div>
         </div>
         <div class="row">
-            <label>uppercase (a-z)</label>
-            <div class="toggle on" data-opt="upper"></div>
+            <label id="label-upper">uppercase (A-Z)</label>
+            <button type="button" class="toggle on" role="switch" aria-checked="true" aria-labelledby="label-upper" data-opt="upper"></button>
         </div>
         <div class="row">
-            <label>lowercase (a-z)</label>
-            <div class="toggle on" data-opt="lower"></div>
+            <label id="label-lower">lowercase (a-z)</label>
+            <button type="button" class="toggle on" role="switch" aria-checked="true" aria-labelledby="label-lower" data-opt="lower"></button>
         </div>
         <div class="row">
-            <label>numbers (0-9)</label>
-            <div class="toggle on" data-opt="numbers"></div>
+            <label id="label-numbers">numbers (0-9)</label>
+            <button type="button" class="toggle on" role="switch" aria-checked="true" aria-labelledby="label-numbers" data-opt="numbers"></button>
         </div>
         <div class="row">
-            <label>symbols (!@#$…)</label>
-            <div class="toggle on" data-opt="symbols"></div>
+            <label id="label-symbols">symbols (!@#$…)</label>
+            <button type="button" class="toggle on" role="switch" aria-checked="true" aria-labelledby="label-symbols" data-opt="symbols"></button>
         </div>
         <div class="row">
-            <label>exclude similar characters (l, 1, o, 0)</label>
-            <div class="toggle" data-opt="excludeSimilar"></div>
+            <label id="label-excludeSimilar">exclude similar characters (l, I, 1, o, O, 0)</label>
+            <button type="button" class="toggle" role="switch" aria-checked="false" aria-labelledby="label-excludeSimilar" data-opt="excludeSimilar"></button>
         </div>
     </div>
 
@@ -432,7 +405,9 @@
         numbers: '0123456789',
         symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
     };
-    const SIMILAR = /[lI1O0]/g;
+    const SIMILAR = /[lI1oO0]/g;
+
+    let password = '';
 
     const state = {
         length: 12,
@@ -460,6 +435,7 @@
             if (charsetToggles.includes(opt) && state[opt] && activeCount <= 1) return;
             t.classList.toggle('on');
             state[opt] = t.classList.contains('on');
+            t.setAttribute('aria-checked', state[opt]);
             render();
         });
     });
@@ -483,23 +459,23 @@
     function generatePassword() {
         const charset = buildCharset();
         if (!charset) return '';
-        const values = new Uint32Array(state.length);
-        crypto.getRandomValues(values);
+        const n = charset.length;
+        // reject values above the largest multiple of n to avoid modulo bias
+        const limit = Math.floor(0x100000000 / n) * n;
+        const buf = new Uint32Array(state.length);
         let result = '';
-        for (let i = 0; i < state.length; i++) {
-            result += charset[values[i] % charset.length];
+        while (result.length < state.length) {
+            crypto.getRandomValues(buf);
+            for (let i = 0; i < buf.length && result.length < state.length; i++) {
+                if (buf[i] < limit) result += charset[buf[i] % n];
+            }
         }
         return result;
     }
 
     function estimateStrength(pw) {
         if (!pw) return { pct: 0, label: 'strength' };
-        let poolSize = 0;
-        if (state.upper) poolSize += 26;
-        if (state.lower) poolSize += 26;
-        if (state.numbers) poolSize += 10;
-        if (state.symbols) poolSize += 27;
-        const bits = Math.log2(poolSize) * pw.length;
+        const bits = Math.log2(buildCharset().length) * pw.length;
         if (bits >= 100) return { pct: 100, label: 'very strong' };
         if (bits >= 70) return { pct: 75, label: 'strong' };
         if (bits >= 45) return { pct: 50, label: 'medium' };
@@ -507,10 +483,10 @@
     }
 
     function render() {
-        const pw = generatePassword();
-        passwordEl.textContent = pw || 'select at least one character type';
-        passwordEl.classList.toggle('empty', !pw);
-        const s = estimateStrength(pw);
+        password = generatePassword();
+        passwordEl.textContent = password || 'select at least one character type';
+        passwordEl.classList.toggle('empty', !password);
+        const s = estimateStrength(password);
         strengthBar.style.setProperty('--fill', s.pct + '%');
         strengthLabel.textContent = s.label;
         copiedMsg.textContent = '';
@@ -523,14 +499,13 @@
 
     const copyIcon = document.getElementById('copyIcon');
     const CHECK_PATH = '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" />';
-    const COPY_PATH = '<path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 9.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667l0 -8.666" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />';
+    const COPY_PATH = copyIcon.innerHTML;
     let copyTimeout;
 
     copyBtn.addEventListener('click', async () => {
-        const pw = passwordEl.textContent;
-        if (!pw || passwordEl.classList.contains('empty')) return;
+        if (!password) return;
         try {
-            await navigator.clipboard.writeText(pw);
+            await navigator.clipboard.writeText(password);
             copiedMsg.textContent = 'copied to clipboard';
             copyIcon.innerHTML = CHECK_PATH;
             copyBtn.classList.remove('done');
