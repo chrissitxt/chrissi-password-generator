@@ -19,7 +19,7 @@ Everything runs in the browser. Nothing is sent anywhere, nothing is logged, not
 
 ## Design
 
-Font: Lora (SIL Open Font License), weight 500, 16px text and 20px heading.
+Font: Crimson Pro (SIL Open Font License), weight 500, 18px text and 1.25em heading.
 
 Design tokens, mint theme. Light and dark follow the system.
 
