@@ -16,3 +16,17 @@ Generates random passwords entirely in the browser using `crypto.getRandomValues
 ## How it works
 
 Everything runs in the browser. Nothing is sent anywhere, nothing is logged, nothing is stored.
+
+## Design
+
+Font: Lora (SIL Open Font License), weight 500, 16px text and 20px heading.
+
+Design tokens, mint theme. Light and dark follow the system.
+
+| Token | Light | Dark |
+| --- | --- | --- |
+| background | `#f5fbf7` | `#0f1512` |
+| accent | `#12241b` | `#e6f6ee` |
+| body | `#40594a` | `#9db8aa` |
+| sub | `#587265` | `#728a7d` |
+| highlight | `#ddf1e6` | `#1f2f27` |
